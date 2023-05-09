@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block title %}Genres{% endblock %} {% block content%}
+<br/>
+<h2> Genre List </h2>
+<br/>
+<!-- (A) SEARCH FORM -->
+<form method="post">
+    <input type="text" name="genre_name" placeholder = "Enter Genre"required>
+    <input type="submit" value="Search">
+</form>
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Genre Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for genre in genresData %}
+        <tr>
+            <td>{{ genre.genre_id }}</td>
+            <td><a href="bookgenre/{{genre.genre_id}}"> {{genre.genre_name}} </a> </td>
+            <td><a href="addbookgenre/{{genre.genre_id}}"> Add/Delete the books </a></td>
+            <td><a href="deletegenre/{{genre.genre_id}}"> Delete </a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="btn btn-primary" href="addgenre">Add New Genre</a>
+{% endblock %}

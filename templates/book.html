@@ -1,0 +1,71 @@
+{% extends "base.html" %} {% block title %}Books{% endblock %} {% block content%}
+<br/>
+<h2>Book List</h2>
+<br/>
+<!-- (A) SEARCH FORM -->
+<!-- <form method="post">
+  <input type="text" name="title" placeholder="Enter Title" required>
+  <input type="submit" value="Search">
+  
+</form> -->
+<form method="POST">
+	<input type="hidden" name="next" value="/">
+	<fieldset>
+
+		<div class="control-group">
+			<!-- <label class="control-label">Search by</label> -->
+			<div class="controls">
+				<select  name="search">
+					<option value="title">Title</option>
+					<option value="publisher_name">Publisher</option>
+					
+				  </select>
+			</div>
+		</div>
+		<br/>
+		<div class="control-group">
+			<!-- <label class="control-label">Query</label> -->
+			<div class="controls">
+				<input type="text" placeholder="Enter data"  class="input-xlarge" name="query" required>
+				<input type="submit" value="Search">
+			</div>
+		</div>
+		
+	</fieldset>
+	<br/>
+</form>
+<!-- <form method="post">
+	<input type="text" name="publisher_name" placeholder="Enter Publisher Name" required>
+	<input type="submit" value="Search">
+	
+  </form> -->
+<!-- (B) OUTPUT SEARCH RESULTS -->
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">Id</th>
+			<th scope="col">Title</th>
+			<th scope="col">Price</th>
+			<th scope="col">Publisher Name</th>
+			<th scope="col">Publication Date</th>
+			<th scope="col">Quantity</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for book in booksData %}
+		<tr>
+			<td>{{ book.book_id }}</td>
+			<td>{{ book.title }}</td>
+			<td>{{ book.price }}</td>
+			<td>{{ book.publisher_name }}</td>
+			<td>{{ book.publication_date }}</td>
+			<td>{{ book.quantity }}</td>
+			<td><a href='updatebook/{{ book.book_id }}'>Edit</a></td>
+            <td><a href='deletebook/{{ book.book_id }}'>Delete</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<a class="btn btn-primary" href="addbook">Add New Book</a>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% block title %}Authors{% endblock %} {% block content%}
+<br/>
+<h2>Add/Delete Books by Author</h2>
+<br/>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Author Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{author.author_id}}</td>
+            <td>{{author.author_name}}</td>
+        </tr>
+        <tr>
+            <subtable class="subtable">
+                <thead>
+                    <tr>
+                        <th scope="col">Book ID</th>
+                        <th scope="col">Book Title</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Publisher Name</th>
+                        <th scope="col">Publication Date</th>
+                        <th scope="col">Quantity</th>
+                    </tr>  
+                </thead>
+                <tbody>
+                    {% for book_author in book_authorData %}
+                    <tr>
+                        <td>{{ book_author.book_id }}</td>
+                        <td>{{ book_author.title }}</td>
+                        <td>{{ book_author.price }}</td>
+                        <td>{{ book_author.publisher_name }}</td>
+                        <td>{{ book_author.publication_date }}</td>
+                        <td>{{ book_author.quantity }}</td>
+                        <td><a href='/deletebookauthor/{{author.author_id}}/{{book_author.book_id}}'>Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </subtable>
+        </tr>
+    </tbody>
+</table>
+<form action="" method="POST">
+    <div class="form-group row">
+        <label for="book_id">Book ID</label>
+        <input type="text" class="form-control" name="book_id" id="book_id" placeholder="Enter Book ID" required>
+    </div>
+    <button type="btnAdd" class="btn btn-primary">Submit</button>
+    <a href="/author" class="btn btn-primary">Cancel</a>
+</form>
+
+{% endblock %}
